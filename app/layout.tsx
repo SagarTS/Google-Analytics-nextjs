@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/inline-script-id */
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Head from 'next/head';
 import Script from 'next/script';
 import './globals.css';
 
@@ -19,13 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <Script
-        strategy='lazyOnload'
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
-      />
+      {process.env.NODE_ENV === 'production' && (
+        <>
+          <Script
+            strategy='lazyOnload'
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
+          />
 
-      <Script strategy='lazyOnload'>
-        {`
+          <Script strategy='lazyOnload'>
+            {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
@@ -33,7 +34,9 @@ export default function RootLayout({
                     page_path: window.location.pathname,
                     });
                 `}
-      </Script>
+          </Script>
+        </>
+      )}
 
       <body className={inter.className}>{children}</body>
     </html>
