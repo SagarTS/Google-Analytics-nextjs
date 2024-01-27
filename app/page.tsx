@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 export default function Home() {
   const event = ({ action, category, label, value }: any) => {
     (window as any).gtag('event', action, {
@@ -17,6 +19,10 @@ export default function Home() {
       value: 'Tesla',
     });
   };
+
+  useEffect(() => {
+    document.title = 'HomePage';
+  }, []);
 
   return (
     <main className='flex min-h-screen flex-col items-center p-24'>

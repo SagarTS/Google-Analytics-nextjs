@@ -1,12 +1,7 @@
-'use client';
-
 import React from 'react';
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
 
 const GoogleAnalytics = () => {
-  const pathname = usePathname();
-
   return (
     <>
       <Script
